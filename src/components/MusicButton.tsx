@@ -3,19 +3,23 @@ import Button from "./Button";
 
 interface Props {
   music: string;
+  united: (status: boolean) => void;
+  isSomeOnePlaying: boolean;
 }
-const MusicButton = ({ music }: Props) => {
+const MusicButton = ({ music, united, isSomeOnePlaying }: Props) => {
   const audio = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const togglePlay = () => {
-    if (audio.current.paused) {
+    if (!isSomeOnePlaying && audio.current.paused) {
       audio.current.play();
       setIsPlaying(true);
-    } else {
+      united(true);
+    } else if (isPlaying) {
       audio.current.pause();
       setIsPlaying(false);
+      united(false);
     }
   };
   const updateTime = () => {
@@ -45,7 +49,7 @@ const MusicButton = ({ music }: Props) => {
           value={currentTime}
           max={duration}
           onChange={updateSeek}
-          style={{width : "200px"}}
+          style={{ width: "200px" }}
         />
       </div>
     </div>

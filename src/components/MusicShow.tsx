@@ -9,7 +9,9 @@ interface Props {
   singer: string;
   album: string;
   year: string;
-  path:string;
+  path: string;
+  united: (status:boolean) => void;
+  isPlaying: boolean;
 }
 const MusicShow = ({
   onClickYT,
@@ -19,7 +21,9 @@ const MusicShow = ({
   singer,
   album,
   year,
-  path
+  path,
+  united,
+  isPlaying,
 }: Props) => {
   return (
     <div
@@ -44,7 +48,7 @@ const MusicShow = ({
           text="Spotify"
           textColor="black"
         />
-        <MusicButton music={path} />
+        <MusicButton music={path} united={united} isSomeOnePlaying={isPlaying} />
       </div>
     </div>
   );

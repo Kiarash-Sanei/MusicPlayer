@@ -1,9 +1,21 @@
+import { useState } from "react";
 import MusicShow from "./components/MusicShow";
 function App() {
-  const names = ["Enemy"];
-  const singers = ["Imagine Dragons & JID"];
-  const albums = ["Arcane League of Legends"];
-  const years = ["2021"];
+  const [isPlaying, setIsPlaying] = useState(false);
+  const names = ["Enemy", "Dream", "Warriors","Believer"];
+  const singers = [
+    "Imagine Dragons & JID",
+    "Imagine Dragons",
+    "Imagine Dragons",
+    "Imagine Dragons"
+  ];
+  const albums = [
+    "Arcane League of Legends",
+    "Smoke + Mirrors",
+    "Smoke + Mirrors",
+    "Evolve"
+  ];
+  const years = ["2021", "2015", "2015", "2017"];
   const musics = [];
   for (let i = 0; i < names.length; i++) {
     const query = names[i] + " " + singers[i];
@@ -16,7 +28,7 @@ function App() {
       singer: singers[i],
       album: albums[i],
       year: years[i],
-      path: "assets/musics/" + names[i]+ ".mp3",
+      path: "assets/musics/" + names[i] + ".mp3",
     });
   }
   return (
@@ -31,6 +43,8 @@ function App() {
           album={music.album}
           year={music.year}
           path={music.path}
+          united = {setIsPlaying}
+          isPlaying = {isPlaying}
         />
       ))}
     </div>
